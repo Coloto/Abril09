@@ -1,8 +1,7 @@
 package com.softtek.presentacion;
 
-import com.softtek.modelo.Persona;
-import com.softtek.modelo.Producto;
-import com.softtek.modelo.calculadora.Calculadora;
+import com.softtek.modelo.ejercicio3.Persona;
+import com.softtek.modelo.ejercicio2.Calculadora;
 import com.softtek.modelo.ejercicio1.Globo;
 
 public class Main {

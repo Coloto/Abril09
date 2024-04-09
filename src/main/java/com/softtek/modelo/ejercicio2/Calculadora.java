@@ -1,6 +1,5 @@
-package com.softtek.modelo.calculadora;
+package com.softtek.modelo.ejercicio2;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
