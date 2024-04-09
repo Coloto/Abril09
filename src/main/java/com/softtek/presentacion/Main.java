@@ -1,8 +1,21 @@
 package com.softtek.presentacion;
 
+import com.softtek.modelo.Producto;
 import com.softtek.modelo.ejercicio3.Persona;
 import com.softtek.modelo.ejercicio2.Calculadora;
 import com.softtek.modelo.ejercicio1.Globo;
+
+import javax.swing.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +26,24 @@ public class Main {
 
         //ejercicio1();
         //ejercicio2();
-        ejercicio3();
+        //ejercicio3();
+
+        //numerosPositivos();
+        //cadenaVacia();
+        //par();
+        //mayor();
+        //primo();
+
+        //mayus();
+        //numeros();
+        //detalles();
+        //dialogo();
+        //archivoRegistro();
+
+        //numAleatorio();
+        //lista();
+        //fechaHora();
+        textoVacio();
     }
 
     public static void ejercicio1(){
@@ -41,15 +71,123 @@ public class Main {
         final int DIVORCIADO = -1;
         final int VIUDO = -2;
 
-        Persona p1 = new Persona("Juan", 20, 0);
-        Persona p2 = new Persona("Paco", 53, 1);
-        Persona p3 = new Persona("Esteban", 38, -1);
-        Persona p4 = new Persona("Mario", 68, -2);
+        Persona p1 = new Persona("Juan", 20, SOLTERO);
+        Persona p2 = new Persona("Paco", 53, CASADO);
+        Persona p3 = new Persona("Esteban", 38, DIVORCIADO);
+        Persona p4 = new Persona("Mario", 68, VIUDO);
 
         System.out.println(p1.toString());
         System.out.println(p2.toString());
         System.out.println(p3.toString());
         System.out.println(p4.toString());
+    }
 
+    public static void numerosPositivos(){
+        Predicate<Integer> positivo = x-> x>0;
+        System.out.println(positivo.test(4));
+        System.out.println(positivo.test(-4));
+    }
+
+    public static void cadenaVacia(){
+        Predicate<String> cadena = x -> !x.isEmpty();
+        System.out.println(cadena.test("Hola"));
+        System.out.println(cadena.test(""));
+    }
+
+    public static void par(){
+        Predicate<Integer> par = x -> x%2==0;
+        System.out.println(par.test(2));
+        System.out.println(par.test(3));
+    }
+
+    public static void mayor(){
+        Predicate<Integer> mayor = x -> x>15;
+        System.out.println(mayor.test(5));
+        System.out.println(mayor.test(34));
+    }
+
+    public static void primo(){
+        Predicate<Integer> primo = numero -> {
+            if (numero <= 1) {
+                return false;
+            }
+            for (int i = 2; i <= Math.sqrt(numero); i++) {
+                if (numero % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        System.out.println(primo.test(7));
+        System.out.println(primo.test(4));
+    }
+
+    public static void mayus(){
+        Consumer<String> mayus = texto -> System.out.println(texto.toUpperCase());
+        mayus.accept("Hola que tal");
+    }
+
+    public static void numeros(){
+        Consumer<Integer> numeros = numero -> System.out.println(numero + " - " + numero*2);
+        numeros.accept(2);
+    }
+
+    public static void detalles(){
+        Producto p1 = new Producto("Manzana", 34);
+        Consumer<Producto> detalles = producto -> System.out.println("Nombre: " + producto.getNombre() + "\nPrecio: " + producto.getPrecio());
+        detalles.accept(p1);
+    }
+
+    public static void dialogo(){
+        Consumer<String> dialogo = texto -> JOptionPane.showMessageDialog(null, texto);
+        dialogo.accept("Hola que tal");
+    }
+
+    public static void archivoRegistro(){
+        Consumer<String> escribirRegistro = texto -> {
+            try {
+                FileWriter file = new FileWriter("registro.txt", true);
+                PrintWriter buffer = new PrintWriter(file);
+                buffer.println(texto);
+                buffer.close();
+                file.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
+        escribirRegistro.accept("Error: No se pudo conectar a la base de datos.");
+    }
+
+    public static void numAleatorio(){
+        Supplier<Integer> numAleatorio = () -> {
+            Random random = new Random();
+            return random.nextInt(10);
+        };
+        System.out.println(numAleatorio.get());
+    }
+
+    public static void lista(){
+        Supplier<ArrayList> listaDeElementos = () -> {
+            ArrayList<String> lista = new ArrayList<>();
+            lista.add("Paco");
+            lista.add("Pepe");
+            lista.add("Juan");
+            return lista;
+        };
+        System.out.println(listaDeElementos.get());
+    }
+
+    public static void fechaHora(){
+        Supplier<LocalDateTime> fechaYHora = () -> {
+            return LocalDateTime.now();
+        };
+        System.out.println(fechaYHora.get());
+    }
+
+    public static void textoVacio(){
+        Supplier<String> textoVacio = () -> {
+            return "";
+        };
+        System.out.println(textoVacio.get());
     }
 }
