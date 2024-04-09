@@ -1,5 +1,6 @@
 package com.softtek.presentacion;
 
+import com.softtek.modelo.ConfiguracionAplicacion;
 import com.softtek.modelo.Producto;
 import com.softtek.modelo.ejercicio3.Persona;
 import com.softtek.modelo.ejercicio2.Calculadora;
@@ -43,7 +44,8 @@ public class Main {
         //numAleatorio();
         //lista();
         //fechaHora();
-        textoVacio();
+        //textoVacio();
+        configuracion();
     }
 
     public static void ejercicio1(){
@@ -189,5 +191,14 @@ public class Main {
             return "";
         };
         System.out.println(textoVacio.get());
+    }
+
+    public static void configuracion(){
+        Supplier<Object> configuracion = () -> {
+            String rutaDelArchivo = "/ruta/del/archivo";
+            String ajustesDeConexion = "configuración_de_conexión";
+            return new ConfiguracionAplicacion(rutaDelArchivo, ajustesDeConexion);
+        };
+        System.out.println(configuracion.get());
     }
 }
