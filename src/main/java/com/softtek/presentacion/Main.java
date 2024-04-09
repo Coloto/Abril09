@@ -84,31 +84,31 @@ public class Main {
         System.out.println(p4.toString());
     }
 
-    public static void numerosPositivos(){
+    public static void numerosPositivos(){ //predicado 1
         Predicate<Integer> positivo = x-> x>0;
         System.out.println(positivo.test(4));
         System.out.println(positivo.test(-4));
     }
 
-    public static void cadenaVacia(){
+    public static void cadenaVacia(){ //predicado 2
         Predicate<String> cadena = x -> !x.isEmpty();
         System.out.println(cadena.test("Hola"));
         System.out.println(cadena.test(""));
     }
 
-    public static void par(){
+    public static void par(){ //predicado 3
         Predicate<Integer> par = x -> x%2==0;
         System.out.println(par.test(2));
         System.out.println(par.test(3));
     }
 
-    public static void mayor(){
+    public static void mayor(){ //predicado 4
         Predicate<Integer> mayor = x -> x>15;
         System.out.println(mayor.test(5));
         System.out.println(mayor.test(34));
     }
 
-    public static void primo(){
+    public static void primo(){ //predicado 5
         Predicate<Integer> primo = numero -> {
             if (numero <= 1) {
                 return false;
@@ -124,28 +124,28 @@ public class Main {
         System.out.println(primo.test(4));
     }
 
-    public static void mayus(){
+    public static void mayus(){ //consumer 1
         Consumer<String> mayus = texto -> System.out.println(texto.toUpperCase());
         mayus.accept("Hola que tal");
     }
 
-    public static void numeros(){
+    public static void numeros(){ //consumer 2
         Consumer<Integer> numeros = numero -> System.out.println(numero + " - " + numero*2);
         numeros.accept(2);
     }
 
-    public static void detalles(){
+    public static void detalles(){ //consumer 3
         Producto p1 = new Producto("Manzana", 34);
         Consumer<Producto> detalles = producto -> System.out.println("Nombre: " + producto.getNombre() + "\nPrecio: " + producto.getPrecio());
         detalles.accept(p1);
     }
 
-    public static void dialogo(){
+    public static void dialogo(){ //consumer 4
         Consumer<String> dialogo = texto -> JOptionPane.showMessageDialog(null, texto);
         dialogo.accept("Hola que tal");
     }
 
-    public static void archivoRegistro(){
+    public static void archivoRegistro(){ //consumer 5
         Consumer<String> escribirRegistro = texto -> {
             try {
                 FileWriter file = new FileWriter("registro.txt", true);
@@ -160,7 +160,7 @@ public class Main {
         escribirRegistro.accept("Error: No se pudo conectar a la base de datos.");
     }
 
-    public static void numAleatorio(){
+    public static void numAleatorio(){ //supplier 1
         Supplier<Integer> numAleatorio = () -> {
             Random random = new Random();
             return random.nextInt(10);
@@ -168,7 +168,7 @@ public class Main {
         System.out.println(numAleatorio.get());
     }
 
-    public static void lista(){
+    public static void lista(){ //supplier 2
         Supplier<ArrayList> listaDeElementos = () -> {
             ArrayList<String> lista = new ArrayList<>();
             lista.add("Paco");
@@ -179,21 +179,21 @@ public class Main {
         System.out.println(listaDeElementos.get());
     }
 
-    public static void fechaHora(){
+    public static void fechaHora(){ //supplier 3
         Supplier<LocalDateTime> fechaYHora = () -> {
             return LocalDateTime.now();
         };
         System.out.println(fechaYHora.get());
     }
 
-    public static void textoVacio(){
+    public static void textoVacio(){ //supplier 4
         Supplier<String> textoVacio = () -> {
             return "";
         };
         System.out.println(textoVacio.get());
     }
 
-    public static void configuracion(){
+    public static void configuracion(){ //supplier 5
         Supplier<Object> configuracion = () -> {
             String rutaDelArchivo = "/ruta/del/archivo";
             String ajustesDeConexion = "configuración_de_conexión";
